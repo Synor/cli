@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+*-debug.log
+*-error.log
+
+# Build directories
+dist
+lib
+
+# Dependency directories
+node_modules
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv files
+.env
+
+# Others
+package-lock.json
+*.local
+tmp
+
+# oclif
+oclif.manifest.json

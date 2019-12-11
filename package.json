@@ -1,6 +1,6 @@
 {
   "name": "@synor/cli",
-  "description": "Database Migration Tool",
+  "description": "Synor Database Migration Tool",
   "version": "0.0.0",
   "author": "Munif Tanjim (https://muniftanjim.dev)",
   "bin": {
@@ -12,10 +12,15 @@
     "@oclif/config": "^1",
     "@oclif/errors": "^1.2.2",
     "@oclif/plugin-help": "^2",
+    "@synor/core": "^0.1.0",
+    "lodash.defaultsdeep": "^4.6.1",
     "tslib": "^1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
+    "@synor/database-mysql": "^0.1.1",
+    "@synor/source-file": "^0.1.1",
+    "@types/lodash.defaultsdeep": "^4.6.6",
     "@types/node": "^10",
     "eslint": "^5.13",
     "eslint-config-oclif": "^3.1",
@@ -41,6 +46,10 @@
   ],
   "homepage": "https://github.com/Synor/cli",
   "keywords": [
+    "synor",
+    "synor-cli",
+    "database",
+    "migration",
     "oclif"
   ],
   "license": "MIT",
@@ -54,10 +63,10 @@
   },
   "repository": "Synor/cli",
   "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "eslint . --ext .ts --config .eslintrc.js",
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "postpack": "rm -f oclif.manifest.json",
     "test": "echo NO TESTS",
+    "posttest": "eslint . --ext .ts --config .eslintrc.js",
     "version": "oclif-dev readme && git add README.md"
   },
   "types": "lib/index.d.ts"

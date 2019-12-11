@@ -4,5 +4,8 @@ module.exports = {
     'oclif-typescript',
     'plugin:prettier/recommended',
     'prettier/@typescript-eslint'
-  ]
+  ],
+  rules: {
+    'new-cap': 'off'
+  }
 }

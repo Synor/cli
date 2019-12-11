@@ -10,6 +10,7 @@ Database Migration Tool
 
 <!-- toc -->
 
+- [@synor/cli](#synorcli)
 - [Usage](#usage)
 - [Commands](#commands)
   <!-- tocstop -->
@@ -36,28 +37,33 @@ USAGE
 
 <!-- commands -->
 
-- [`synor hello [FILE]`](#synor-hello-file)
+- [`synor current`](#synor-current)
 - [`synor help [COMMAND]`](#synor-help-command)
 
-## `synor hello [FILE]`
+## `synor current`
 
-describe the command here
+Get current database migration version
 
 ```
 USAGE
-  $ synor hello [FILE]
+  $ synor current
 
 OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
+  -D, --databaseEngine=databaseEngine  Database Engine
+  -S, --sourceEngine=sourceEngine      Source Engine
+  -b, --baseVersion=baseVersion        Version of the Base Migration
+  -c, --config=config                  Configuration file path
+  -d, --databaseUri=databaseUri        Database URI
+  -h, --help                           show help
+  -i, --recordStartId=recordStartId    Migration Record Start ID
+  -s, --sourceUri=sourceUri            Source URI
 
 EXAMPLE
-  $ synor hello
-  hello world from ./src/hello.ts!
+  $ synor current
+  Current Version: 0
 ```
 
-_See code: [src/commands/hello.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/hello.ts)_
+_See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/current.ts)_
 
 ## `synor help [COMMAND]`
 

@@ -13,6 +13,7 @@
     "@oclif/errors": "^1.2.2",
     "@oclif/plugin-help": "^2",
     "@synor/core": "^0.1.0",
+    "cli-ux": "^5.4.0",
     "lodash.defaultsdeep": "^4.6.1",
     "tslib": "^1"
   },

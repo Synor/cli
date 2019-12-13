@@ -1,9 +1,10 @@
+import { cli } from 'cli-ux'
 import Command from '../command'
 
 export default class Current extends Command {
-  static description = 'Get current database migration version'
+  static description = 'show current migration record'
 
-  static examples = [[`$ synor current`, `Current Version: 0`].join('\n')]
+  static examples = [`$ synor current`]
 
   static flags = {
     ...Command.flags
@@ -12,12 +13,47 @@ export default class Current extends Command {
   static args = []
 
   async run() {
-    this.synor.migrator.on('version', version => {
-      this.log(`Current Version: ${version}`)
+    const { migrator } = this.synor
+
+    migrator.on('current', record => {
+      cli.table([record], {
+        id: {
+          header: 'ID'
+        },
+        version: {
+          header: 'Version'
+        },
+        type: {
+          header: 'Type'
+        },
+        title: {
+          header: 'Title'
+        },
+        hash: {
+          header: 'Hash',
+          get: record => record.hash || 'N/A'
+        },
+        appliedAt: {
+          header: 'AppliedAt',
+          get: row => new Date(row.appliedAt).toLocaleString()
+        },
+        appliedBy: {
+          header: 'AppliedBy',
+          get: record => record.appliedBy || 'N/A'
+        },
+        executionTime: {
+          header: 'ExecutionTime',
+          get: row => `${Number(row.executionTime / 1000).toFixed(2)}s`
+        },
+        state: {
+          header: 'State',
+          get: row => (row.dirty ? 'dirty' : row.state)
+        }
+      })
     })
 
-    await this.synor.migrator.open()
-    await this.synor.migrator.version()
-    await this.synor.migrator.close()
+    await migrator.open()
+    await migrator.current()
+    await migrator.close()
   }
 }

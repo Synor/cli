@@ -1,5 +1,6 @@
 import { Command, flags } from '@oclif/command'
 import { Input } from '@oclif/parser'
+import { SynorError } from '@synor/core'
 import { initSynor } from './synor'
 
 type Await<T> = T extends Promise<infer U> ? U : T
@@ -58,5 +59,28 @@ export default abstract class extends Command {
       baseVersion: flags.baseVersion,
       recordStartId: flags.recordStartId
     })
+  }
+
+  async catch(error: Error) {
+    if (error instanceof SynorError) {
+      switch (error.type) {
+        case 'not_found':
+          this.error(
+            [
+              `Missing Migration Source =>`,
+              `Version(${error.data.version})`,
+              `Type(${error.data.type})`,
+              `Title(${error.data.title})`
+            ].join(' '),
+            { code: error.type, exit: 1 }
+          )
+          break
+        case 'exception':
+          this.error(error.message, { code: error.type, exit: 1 })
+          break
+      }
+    }
+
+    await super.catch(error)
   }
 }

@@ -23,8 +23,6 @@ export default class Repair extends Command {
         cli.action.stop('done!')
       })
 
-    await migrator.open()
-
     const confirmed = await cli.confirm('Are you sure?! (y/n)')
 
     if (confirmed) {
@@ -32,7 +30,5 @@ export default class Repair extends Command {
     } else {
       this.log('Skipping repair...')
     }
-
-    await migrator.close()
   }
 }

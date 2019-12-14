@@ -44,8 +44,7 @@ export default class Pending extends Command {
         }
       )
     })
-    await migrator.open()
+
     await migrator.pending()
-    await migrator.close()
   }
 }

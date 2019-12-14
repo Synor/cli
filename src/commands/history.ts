@@ -70,8 +70,6 @@ export default class History extends Command {
       )
     })
 
-    await migrator.open()
     await migrator.history()
-    await migrator.close()
   }
 }

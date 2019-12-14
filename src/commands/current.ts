@@ -52,8 +52,6 @@ export default class Current extends Command {
       })
     })
 
-    await migrator.open()
     await migrator.current()
-    await migrator.close()
   }
 }

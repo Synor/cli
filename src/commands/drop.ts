@@ -23,14 +23,12 @@ export default class Drop extends Command {
         cli.action.stop('done!')
       })
 
-    await migrator.open()
-
     const confirmed = await cli.confirm('[DANGEROUS] Are you sure?! (y/n)')
 
     if (confirmed) {
       await migrator.drop()
+    } else {
+      this.log('Skipping drop...')
     }
-
-    await migrator.close()
   }
 }

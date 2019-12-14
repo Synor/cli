@@ -1,7 +1,8 @@
 import { Command, flags } from '@oclif/command'
 import { Input } from '@oclif/parser'
-import { SynorError } from '@synor/core'
+import { cli } from 'cli-ux'
 import { initSynor } from './synor'
+import { isSynorError } from './utils/error'
 
 type Await<T> = T extends Promise<infer U> ? U : T
 
@@ -38,7 +39,7 @@ export default abstract class extends Command {
     baseVersion: flags.string({
       char: 'b',
       description: 'Version of the Base Migration',
-      env: 'SYNOR_BASE_VERSIOON'
+      env: 'SYNOR_BASE_VERSION'
     }),
     recordStartId: flags.integer({
       char: 'i',
@@ -59,10 +60,26 @@ export default abstract class extends Command {
       baseVersion: flags.baseVersion,
       recordStartId: flags.recordStartId
     })
+
+    this.synor.migrator
+      .on('open:start', () => {
+        cli.action.start('Opening migrator')
+      })
+      .on('open:end', () => {
+        cli.action.stop('done!')
+      })
+      .on('close:start', () => {
+        cli.action.start('Closing migrator')
+      })
+      .on('close:end', () => {
+        cli.action.stop('done!')
+      })
+
+    await this.synor.migrator.open()
   }
 
   async catch(error: Error) {
-    if (error instanceof SynorError) {
+    if (isSynorError(error)) {
       switch (error.type) {
         case 'not_found':
           this.error(
@@ -70,7 +87,7 @@ export default abstract class extends Command {
               `Missing Migration Source =>`,
               `Version(${error.data.version})`,
               `Type(${error.data.type})`,
-              `Title(${error.data.title})`
+              error.data.title && `Title(${error.data.title})`
             ].join(' '),
             { code: error.type, exit: 1 }
           )
@@ -82,5 +99,11 @@ export default abstract class extends Command {
     }
 
     await super.catch(error)
+  }
+
+  async finally(error: Error) {
+    await this.synor.migrator.close()
+
+    await super.finally(error)
   }
 }

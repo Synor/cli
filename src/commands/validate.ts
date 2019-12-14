@@ -1,21 +1,10 @@
 import { color } from '@oclif/color'
 import { cli } from 'cli-ux'
-import { MigrationRecord, SynorError } from '../../../core/src'
 import Command from '../command'
+import { isSynorError, isValidationErrorType } from '../utils/error'
 
-type ValidationErrorType = Extract<
-  SynorError['type'],
-  'dirty' | 'hash_mismatch'
->
-
-const DirtyErrorType: ValidationErrorType = 'dirty'
-const HashMismatchErrorType: ValidationErrorType = 'hash_mismatch'
-
-const isValidationErrorType = (
-  errorType: SynorError['type']
-): errorType is ValidationErrorType => {
-  return errorType === DirtyErrorType || errorType === HashMismatchErrorType
-}
+type MigrationRecord = import('@synor/core').MigrationRecord
+type ValidationErrorType = import('../utils/error').ValidationErrorType
 
 export default class Validate extends Command {
   static description = 'validate applied migrations'
@@ -48,7 +37,7 @@ export default class Validate extends Command {
         recordById[record.id].status = 'valid'
       })
       .on('validate:error', (record, error) => {
-        if (error instanceof SynorError && isValidationErrorType(error.type)) {
+        if (isSynorError(error) && isValidationErrorType(error.type)) {
           recordById[record.id].status = error.type
         } else {
           throw error
@@ -110,9 +99,7 @@ export default class Validate extends Command {
         isInvalid = records.some(record => record.status !== 'valid')
       })
 
-    await migrator.open()
     await migrator.validate()
-    await migrator.close()
 
     if (isInvalid) {
       this.error('Validation Error', { exit: 1 })

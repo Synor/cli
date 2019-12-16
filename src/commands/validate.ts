@@ -12,12 +12,15 @@ export default class Validate extends Command {
   static examples = [`$ synor validate`]
 
   static flags = {
+    extended: cli.table.Flags.extended,
     ...Command.flags
   }
 
   static args = []
 
   async run() {
+    const { flags } = this.parse(Validate)
+
     const { migrator } = this.synor
 
     const recordById: Record<
@@ -36,7 +39,7 @@ export default class Validate extends Command {
       .on('validate:run:end', async record => {
         recordById[record.id].status = 'valid'
       })
-      .on('validate:error', (record, error) => {
+      .on('validate:error', (error, record) => {
         if (isSynorError(error) && isValidationErrorType(error.type)) {
           recordById[record.id].status = error.type
         } else {
@@ -46,55 +49,61 @@ export default class Validate extends Command {
       .on('validate:end', async () => {
         const records = Object.values(recordById)
 
-        cli.table(records, {
-          id: {
-            header: 'ID',
-            extended: true
+        cli.table(
+          records,
+          {
+            id: {
+              header: 'ID',
+              extended: true
+            },
+            version: {
+              header: 'Version',
+              get: row =>
+                row.status === 'valid'
+                  ? color.green(row.version)
+                  : color.red(row.version)
+            },
+            type: {
+              header: 'Type',
+              extended: true
+            },
+            title: {
+              header: 'Title'
+            },
+            hash: {
+              header: 'Hash',
+              get: row =>
+                row.status === 'hash_mismatch'
+                  ? color.red(row.hash)
+                  : color.green(row.hash)
+            },
+            appliedAt: {
+              header: 'AppliedAt',
+              get: row => new Date(row.appliedAt).toLocaleString(),
+              extended: true
+            },
+            appliedBy: {
+              header: 'AppliedBy',
+              get: record => record.appliedBy || 'N/A',
+              extended: true
+            },
+            executionTime: {
+              header: 'ExecutionTime',
+              get: row => `${Number(row.executionTime / 1000).toFixed(2)}s`,
+              extended: true
+            },
+            status: {
+              header: 'Status',
+              get: row =>
+                row.status === 'valid'
+                  ? color.green(row.status)
+                  : color.red(row.status)
+            }
           },
-          version: {
-            header: 'Version',
-            get: row =>
-              row.status === 'valid'
-                ? color.green(row.version)
-                : color.red(row.version)
-          },
-          type: {
-            header: 'Type',
-            extended: true
-          },
-          title: {
-            header: 'Title'
-          },
-          hash: {
-            header: 'Hash',
-            get: row =>
-              row.status === 'hash_mismatch'
-                ? color.red(row.hash)
-                : color.green(row.hash)
-          },
-          appliedAt: {
-            header: 'AppliedAt',
-            get: row => new Date(row.appliedAt).toLocaleString(),
-            extended: true
-          },
-          appliedBy: {
-            header: 'AppliedBy',
-            get: record => record.appliedBy || 'N/A',
-            extended: true
-          },
-          executionTime: {
-            header: 'ExecutionTime',
-            get: row => `${Number(row.executionTime / 1000).toFixed(2)}s`,
-            extended: true
-          },
-          status: {
-            header: 'Status',
-            get: row =>
-              row.status === 'valid'
-                ? color.green(row.status)
-                : color.red(row.status)
+          {
+            extended: flags.extended
           }
-        })
+        )
 
         isInvalid = records.some(record => record.status !== 'valid')
       })

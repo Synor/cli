@@ -7,10 +7,11 @@ import { isSynorError } from './utils/error'
 type Await<T> = T extends Promise<infer U> ? U : T
 
 export default abstract class extends Command {
+  private initialized = false
+
   synor!: Await<ReturnType<typeof initSynor>>
 
   static flags = {
-    help: flags.help({ char: 'h', description: 'show help' }),
     config: flags.string({
       char: 'c',
       description: 'Configuration file path',
@@ -61,26 +62,44 @@ export default abstract class extends Command {
       recordStartId: flags.recordStartId
     })
 
-    this.synor.migrator
-      .on('open:start', () => {
-        cli.action.start('Opening migrator')
-      })
-      .on('open:end', () => {
-        cli.action.stop('done!')
-      })
-      .on('close:start', () => {
-        cli.action.start('Closing migrator')
-      })
-      .on('close:end', () => {
-        cli.action.stop('done!')
-      })
+    if (this.config.debug) {
+      this.synor.migrator
+        .on('open:start', () => {
+          cli.action.start('Opening migrator')
+        })
+        .on('open:end', () => {
+          cli.action.stop()
+        })
+        .on('close:start', () => {
+          cli.action.start('Closing migrator')
+        })
+        .on('close:end', () => {
+          cli.action.stop()
+        })
+    }
 
     await this.synor.migrator.open()
+
+    this.initialized = true
   }
 
   async catch(error: Error) {
     if (isSynorError(error)) {
       switch (error.type) {
+        case 'dirty':
+        case 'hash_mismatch':
+          this.error(
+            [
+              `Validation Error (${error.type}) =>`,
+              `Version(${error.data.version})`,
+              `Type(${error.data.type})`,
+              error.data.title && `Title(${error.data.title})`,
+              `\nRun validation for more information:`,
+              `\n$ ${this.config.bin} validate`
+            ].join(' '),
+            { code: error.type, exit: 1 }
+          )
+          break
         case 'not_found':
           this.error(
             [
@@ -92,9 +111,10 @@ export default abstract class extends Command {
             { code: error.type, exit: 1 }
           )
           break
-        case 'exception':
-          this.error(error.message, { code: error.type, exit: 1 })
+        case 'exception': {
+          this.error(error, { code: error.type, exit: 1 })
           break
+        }
       }
     }
 
@@ -102,7 +122,9 @@ export default abstract class extends Command {
   }
 
   async finally(error: Error) {
-    await this.synor.migrator.close()
+    if (this.initialized) {
+      await this.synor.migrator.close()
+    }
 
     await super.finally(error)
   }

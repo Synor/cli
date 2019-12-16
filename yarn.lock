@@ -154,10 +154,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@synor/core@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.2.0.tgz#bc237e9172c7588cc291d43e38731fa9f27d915e"
-  integrity sha512-PeD9FHq9rUv7SnhrW6r6Qn3onoOP9bkl8pLWzqIOQsRb/GCaD8WjCGu9YXS9ewXFoFrry5Vl0kxngcEltOZVvw==
+"@synor/core@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.3.0.tgz#28687423cc1c54d90b912e530a85e2f1bbb60c14"
+  integrity sha512-PnGokxMEl7IJFAYZhkgIHAeXIGGmpZt/Z+RUH+MBE992Yb2G0avPa9/ibS8ipsM++lZoVzi9kvSMibv5TxLuSQ==
   dependencies:
     debug "^4.1.1"
     lodash.defaultsdeep "^4.6.1"

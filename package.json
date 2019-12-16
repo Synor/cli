@@ -1,6 +1,6 @@
 {
   "name": "@synor/cli",
-  "description": "Synor Database Migration Tool",
+  "description": "CLI for Synor - Database Migration Tool",
   "version": "0.0.0",
   "author": "Munif Tanjim (https://muniftanjim.dev)",
   "bin": {
@@ -13,7 +13,7 @@
     "@oclif/config": "^1",
     "@oclif/errors": "^1.2.2",
     "@oclif/plugin-help": "^2",
-    "@synor/core": "^0.2.0",
+    "@synor/core": "^0.3.0",
     "cli-ux": "^5.4.0",
     "lodash.defaultsdeep": "^4.6.1",
     "tslib": "^1"
@@ -47,8 +47,8 @@
   ],
   "homepage": "https://github.com/Synor/cli",
   "keywords": [
+    "cli",
     "synor",
-    "synor-cli",
     "database",
     "migration",
     "oclif"

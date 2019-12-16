@@ -1,37 +1,67 @@
-# @synor/cli
+# Synor CLI
 
-Database Migration Tool
+CLI for Synor - Database Migration Tool
 
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/@synor/cli.svg)](https://npmjs.org/package/@synor/cli)
-[![Codecov](https://codecov.io/gh/Synor/cli/branch/master/graph/badge.svg)](https://codecov.io/gh/Synor/cli)
-[![Downloads/week](https://img.shields.io/npm/dw/@synor/cli.svg)](https://npmjs.org/package/@synor/cli)
-[![License](https://img.shields.io/npm/l/@synor/cli.svg)](https://github.com/Synor/cli/blob/master/package.json)
+[![Synor CLI](https://img.shields.io/badge/synor-cli-blue?style=for-the-badge)](https://github.com/Synor)
+[![Version](https://img.shields.io/npm/v/@synor/cli?style=for-the-badge)](https://npmjs.org/package/@synor/cli)
+[![License](https://img.shields.io/github/license/Synor/cli?style=for-the-badge)](https://github.com/Synor/cli/blob/master/LICENSE)
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg?style=for-the-badge)](https://oclif.io)
 
 <!-- toc -->
 
-- [@synor/cli](#synorcli)
-- [Usage](#usage)
+- [Synor CLI](#synor-cli)
+- [Installation](#installation)
+- [Configuration](#configuration)
 - [Commands](#commands)
   <!-- tocstop -->
 
-# Usage
+# Installation
 
-<!-- usage -->
+**using `yarn`**:
 
-```sh-session
-$ npm install -g @synor/cli
-$ synor COMMAND
-running command...
-$ synor (-v|--version|version)
-@synor/cli/0.0.0 linux-x64 node-v10.15.1
-$ synor --help [COMMAND]
-USAGE
-  $ synor COMMAND
-...
+```sh
+yarn add --dev @synor/cli
 ```
 
-<!-- usagestop -->
+**using `npm`**:
+
+```sh
+npm install --save-dev @synor/cli
+```
+
+# Configuration
+
+Synor CLI reads config file from one of the following locations:
+
+- File path passed to `--config` or `-c` flag
+- `.synorrc.js`
+- `synor.config.js`
+
+The first one found is used by Synor CLI.
+
+Options in config file is overridden by their available command flag counterparts.
+
+**Example**:
+
+```js
+const path = require('path')
+
+module.exports = {
+  databaseEngine: `@synor/database-mysql`,
+  databaseUri: `mysql://root:root@localhost:3306/synor`,
+  sourceEngine: `@synor/source-file`,
+  sourceUri: `file://${path.resolve('test.local/mysql')}`,
+
+  // Optional
+  baseVersion: '0',
+  recordStartId: 1,
+  migrationInfoNotation: {
+    do: 'do',
+    undo: 'undo',
+    seperator: '.'
+  }
+}
+```
 
 # Commands
 
@@ -60,7 +90,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
@@ -68,7 +97,7 @@ EXAMPLE
   $ synor current
 ```
 
-_See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/current.ts)_
+_See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/current.ts)_
 
 ## `synor drop`
 
@@ -84,7 +113,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
@@ -92,7 +120,7 @@ EXAMPLE
   $ synor drop
 ```
 
-_See code: [src/commands/drop.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/drop.ts)_
+_See code: [src/commands/drop.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/drop.ts)_
 
 ## `synor help [COMMAND]`
 
@@ -125,7 +153,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
@@ -138,11 +165,11 @@ EXAMPLES
   $ synor history --recordStartId=1
 ```
 
-_See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/history.ts)_
+_See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/history.ts)_
 
 ## `synor migrate TARGETVERSION`
 
-run migrations
+migrate to targetVersion
 
 ```
 USAGE
@@ -157,7 +184,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
@@ -165,7 +191,7 @@ EXAMPLE
   $ synor migrate
 ```
 
-_See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/migrate.ts)_
+_See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/migrate.ts)_
 
 ## `synor pending`
 
@@ -181,7 +207,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
@@ -190,7 +215,7 @@ EXAMPLE
   $ synor pending
 ```
 
-_See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/pending.ts)_
+_See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/pending.ts)_
 
 ## `synor repair`
 
@@ -206,7 +231,6 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
@@ -214,7 +238,7 @@ EXAMPLE
   $ synor repair
 ```
 
-_See code: [src/commands/repair.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/repair.ts)_
+_See code: [src/commands/repair.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/repair.ts)_
 
 ## `synor validate`
 
@@ -230,14 +254,14 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
-  -h, --help                           show help
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
+  -x, --extended                       show extra columns
 
 EXAMPLE
   $ synor validate
 ```
 
-_See code: [src/commands/validate.ts](https://github.com/Synor/cli/blob/v0.0.0/src/commands/validate.ts)_
+_See code: [src/commands/validate.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/validate.ts)_
 
 <!-- commandsstop -->

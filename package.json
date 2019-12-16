@@ -1,7 +1,7 @@
 {
   "name": "@synor/cli",
   "description": "CLI for Synor - Database Migration Tool",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Munif Tanjim (https://muniftanjim.dev)",
   "bin": {
     "synor": "./bin/run"
@@ -64,11 +64,16 @@
   },
   "repository": "Synor/cli",
   "scripts": {
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && npm run readme",
     "postpack": "rm -f oclif.manifest.json",
     "test": "echo NO TESTS",
     "posttest": "eslint . --ext .ts --config .eslintrc.js",
-    "version": "oclif-dev readme && git add README.md"
+    "readme": "oclif-dev readme",
+    "postreadme": "pretty-quick --pattern '**/*.md'",
+    "version": "npm run readme && pretty-quick && git add README.md"
   },
-  "types": "lib/index.d.ts"
+  "types": "lib/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  }
 }

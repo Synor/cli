@@ -1,11 +1,11 @@
-# Synor CLI
-
-CLI for Synor - Database Migration Tool
-
 [![Synor CLI](https://img.shields.io/badge/synor-cli-blue?style=for-the-badge)](https://github.com/Synor)
 [![Version](https://img.shields.io/npm/v/@synor/cli?style=for-the-badge)](https://npmjs.org/package/@synor/cli)
 [![License](https://img.shields.io/github/license/Synor/cli?style=for-the-badge)](https://github.com/Synor/cli/blob/master/LICENSE)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg?style=for-the-badge)](https://oclif.io)
+
+# Synor CLI
+
+CLI for Synor - Database Migration Tool
 
 <!-- toc -->
 
@@ -50,7 +50,7 @@ module.exports = {
   databaseEngine: `@synor/database-mysql`,
   databaseUri: `mysql://root:root@localhost:3306/synor`,
   sourceEngine: `@synor/source-file`,
-  sourceUri: `file://${path.resolve('test.local/mysql')}`,
+  sourceUri: `file://${path.resolve('migrations')}`,
 
   // Optional
   baseVersion: '0',

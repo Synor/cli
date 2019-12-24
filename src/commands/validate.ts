@@ -7,7 +7,10 @@ type MigrationRecord = import('@synor/core').MigrationRecord
 type ValidationErrorType = import('../utils/error').ValidationErrorType
 
 export default class Validate extends Command {
-  static description = 'validate applied migrations'
+  static description = [
+    `validate migration records`,
+    `Validates the records for migrations that are currently applied.`
+  ].join('\n')
 
   static examples = [`$ synor validate`]
 

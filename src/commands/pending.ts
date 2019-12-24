@@ -2,9 +2,12 @@ import { cli } from 'cli-ux'
 import Command from '../command'
 
 export default class Pending extends Command {
-  static description = 'show pending migrations'
+  static description = [
+    `show pending migrations`,
+    `Shows the pending migrations that are available at source.`
+  ].join('\n')
 
-  static examples = [[`$ synor pending`].join('\n')]
+  static examples = [`$ synor pending`]
 
   static flags = {
     extended: cli.table.Flags.extended,

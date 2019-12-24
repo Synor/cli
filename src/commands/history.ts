@@ -4,7 +4,10 @@ import Command from '../command'
 export default class History extends Command {
   static aliases = ['records']
 
-  static description = 'show migration history'
+  static description = [
+    `show migration history`,
+    `Shows detailed records of the migrations that have already run on database.`
+  ].join('\n')
 
   static examples = [`$ synor history`, `$ synor history --recordStartId=1`]
 

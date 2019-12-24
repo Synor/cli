@@ -2,9 +2,12 @@ import { cli } from 'cli-ux'
 import Command from '../command'
 
 export default class Migrate extends Command {
-  static description = 'migrate to targetVersion'
+  static description = [
+    `migrate database to specific version`,
+    `Runs necessary migrations to reach the target migration version.`
+  ].join('\n')
 
-  static examples = [`$ synor migrate`]
+  static examples = [`$ synor migrate 42`]
 
   static flags = {
     ...Command.flags
@@ -13,7 +16,7 @@ export default class Migrate extends Command {
   static args: typeof Command.args = [
     {
       name: 'targetVersion',
-      description: 'target version for migration',
+      description: 'target migration version',
       required: true
     }
   ]

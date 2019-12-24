@@ -2,7 +2,12 @@ import Command from '../command'
 import { cli } from 'cli-ux'
 
 export default class Drop extends Command {
-  static description = 'drop database'
+  static description = [
+    `drop database`,
+    `This command is DANGEROUS.`,
+    `Drops everything in the database.`,
+    `It should only be used for development purposes.`
+  ].join('\n')
 
   static examples = [`$ synor drop`]
 

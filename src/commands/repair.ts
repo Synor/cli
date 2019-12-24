@@ -2,7 +2,11 @@ import { cli } from 'cli-ux'
 import Command from '../command'
 
 export default class Repair extends Command {
-  static description = 'repair mismatched hashes and delete dirty records'
+  static description = [
+    `repair migration records`,
+    `- Updates the mismatched hashes`,
+    `- Deletes the dirty records`
+  ].join('\n')
 
   static examples = [`$ synor repair`]
 

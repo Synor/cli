@@ -2,7 +2,10 @@ import { cli } from 'cli-ux'
 import Command from '../command'
 
 export default class Current extends Command {
-  static description = 'show current migration record'
+  static description = [
+    `show current migration record`,
+    `This record indicates the current migration version for the database.`
+  ].join('\n')
 
   static examples = [`$ synor current`]
 

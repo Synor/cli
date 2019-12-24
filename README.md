@@ -20,13 +20,13 @@ CLI for Synor - Database Migration Tool
 **using `yarn`**:
 
 ```sh
-yarn add --dev @synor/cli
+yarn add --dev @synor/cli @synor/core
 ```
 
 **using `npm`**:
 
 ```sh
-npm install --save-dev @synor/cli
+npm install --save-dev @synor/cli @synor/core
 ```
 
 # Configuration
@@ -41,6 +41,19 @@ The first one found is used by Synor CLI.
 
 Options in config file is overridden by their available command flag counterparts.
 
+**Required Options**:
+
+| Name             | Description                                                                                                     |
+| ---------------- | --------------------------------------------------------------------------------------------------------------- |
+| `databaseEngine` | Database Engine function / [package name](https://www.npmjs.com/search?q=keywords:synor-database) / module path |
+| `databaseUri`    | Database Engine URI                                                                                             |
+| `sourceEngine`   | Source Engine function / [package name](https://www.npmjs.com/search?q=keywords:synor-source) / module path     |
+| `sourceUri`      | Source Engine URI                                                                                               |
+
+**Other Options**:
+
+You can also specify other [configuration options](https://github.com/Synor/core/blob/0.4.0/src/index.ts#L36-L45) that [Synor Core](https://github.com/Synor/core) accepts.
+
 **Example**:
 
 ```js
@@ -52,7 +65,6 @@ module.exports = {
   sourceEngine: `@synor/source-file`,
   sourceUri: `file://${path.resolve('migrations')}`,
 
-  // Optional
   baseVersion: '0',
   recordStartId: 1,
   migrationInfoNotation: {
@@ -93,6 +105,9 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
+DESCRIPTION
+  This record indicates the current migration version for the database.
+
 EXAMPLE
   $ synor current
 ```
@@ -115,6 +130,11 @@ OPTIONS
   -d, --databaseUri=databaseUri        Database URI
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
+
+DESCRIPTION
+  This command is DANGEROUS.
+  Drops everything in the database.
+  It should only be used for development purposes.
 
 EXAMPLE
   $ synor drop
@@ -157,6 +177,9 @@ OPTIONS
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
 
+DESCRIPTION
+  Shows detailed records of the migrations that have already run on database.
+
 ALIASES
   $ synor records
 
@@ -169,14 +192,14 @@ _See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.1.0/sr
 
 ## `synor migrate TARGETVERSION`
 
-migrate to targetVersion
+migrate database to specific version
 
 ```
 USAGE
   $ synor migrate TARGETVERSION
 
 ARGUMENTS
-  TARGETVERSION  target version for migration
+  TARGETVERSION  target migration version
 
 OPTIONS
   -D, --databaseEngine=databaseEngine  Database Engine
@@ -187,8 +210,11 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
+DESCRIPTION
+  Runs necessary migrations to reach the target migration version.
+
 EXAMPLE
-  $ synor migrate
+  $ synor migrate 42
 ```
 
 _See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/migrate.ts)_
@@ -211,6 +237,9 @@ OPTIONS
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
 
+DESCRIPTION
+  Shows the pending migrations that are available at source.
+
 EXAMPLE
   $ synor pending
 ```
@@ -219,7 +248,7 @@ _See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.1.0/sr
 
 ## `synor repair`
 
-repair mismatched hashes and delete dirty records
+repair migration records
 
 ```
 USAGE
@@ -234,6 +263,10 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
 
+DESCRIPTION
+  - Updates the mismatched hashes
+  - Deletes the dirty records
+
 EXAMPLE
   $ synor repair
 ```
@@ -242,7 +275,7 @@ _See code: [src/commands/repair.ts](https://github.com/Synor/cli/blob/v0.1.0/src
 
 ## `synor validate`
 
-validate applied migrations
+validate migration records
 
 ```
 USAGE
@@ -257,6 +290,9 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
+
+DESCRIPTION
+  Validates the records for migrations that are currently applied.
 
 EXAMPLE
   $ synor validate

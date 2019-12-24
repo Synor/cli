@@ -79,17 +79,18 @@ export default class Validate extends Command {
             },
             appliedAt: {
               header: 'AppliedAt',
-              get: row => new Date(row.appliedAt).toLocaleString(),
+              get: row => color.reset(new Date(row.appliedAt).toLocaleString()),
               extended: true
             },
             appliedBy: {
               header: 'AppliedBy',
-              get: record => record.appliedBy || 'N/A',
+              get: record => color.reset(record.appliedBy || 'N/A'),
               extended: true
             },
             executionTime: {
               header: 'ExecutionTime',
-              get: row => `${Number(row.executionTime / 1000).toFixed(2)}s`,
+              get: row =>
+                color.reset(`${Number(row.executionTime / 1000).toFixed(2)}s`),
               extended: true
             },
             status: {

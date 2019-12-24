@@ -112,7 +112,7 @@ EXAMPLE
   $ synor current
 ```
 
-_See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/current.ts)_
+_See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/current.ts)_
 
 ## `synor drop`
 
@@ -140,7 +140,7 @@ EXAMPLE
   $ synor drop
 ```
 
-_See code: [src/commands/drop.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/drop.ts)_
+_See code: [src/commands/drop.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/drop.ts)_
 
 ## `synor help [COMMAND]`
 
@@ -188,7 +188,7 @@ EXAMPLES
   $ synor history --recordStartId=1
 ```
 
-_See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/history.ts)_
+_See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/history.ts)_
 
 ## `synor migrate TARGETVERSION`
 
@@ -217,7 +217,7 @@ EXAMPLE
   $ synor migrate 42
 ```
 
-_See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/migrate.ts)_
+_See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/migrate.ts)_
 
 ## `synor pending`
 
@@ -244,7 +244,7 @@ EXAMPLE
   $ synor pending
 ```
 
-_See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/pending.ts)_
+_See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/pending.ts)_
 
 ## `synor repair`
 
@@ -271,7 +271,7 @@ EXAMPLE
   $ synor repair
 ```
 
-_See code: [src/commands/repair.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/repair.ts)_
+_See code: [src/commands/repair.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/repair.ts)_
 
 ## `synor validate`
 
@@ -298,6 +298,6 @@ EXAMPLE
   $ synor validate
 ```
 
-_See code: [src/commands/validate.ts](https://github.com/Synor/cli/blob/v0.1.0/src/commands/validate.ts)_
+_See code: [src/commands/validate.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/validate.ts)_
 
 <!-- commandsstop -->

@@ -70,7 +70,7 @@ module.exports = {
   migrationInfoNotation: {
     do: 'do',
     undo: 'undo',
-    seperator: '.'
+    separator: '.'
   }
 }
 ```

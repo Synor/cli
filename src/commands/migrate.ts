@@ -1,3 +1,4 @@
+import { flags } from '@oclif/command'
 import { cli } from 'cli-ux'
 import Command from '../command'
 
@@ -7,24 +8,39 @@ export default class Migrate extends Command {
     `Runs necessary migrations to reach the target migration version.`
   ].join('\n')
 
-  static examples = [`$ synor migrate 42`]
+  static examples = [`$ synor migrate 42`, `$ synor migrate --from 00 --to 42`]
 
   static flags = {
-    ...Command.flags
+    ...Command.flags,
+    from: flags.string({
+      char: 'f',
+      description: 'from migration version',
+      dependsOn: ['to']
+    }),
+    to: flags.string({
+      char: 't',
+      description: 'to migration version',
+      dependsOn: ['from']
+    })
   }
 
   static args: typeof Command.args = [
     {
       name: 'targetVersion',
-      description: 'target migration version',
-      required: true
+      description: 'target migration version'
     }
   ]
 
   async run() {
-    const { args } = this.parse(Migrate)
+    const { args, flags } = this.parse(Migrate)
 
     const { migrator } = this.synor
+
+    const targetVersion: string = flags.to || args.targetVersion
+
+    if (!targetVersion) {
+      this.error('Must provide either --to= or TARGETVERSION')
+    }
 
     let currentVersion: string
 
@@ -49,19 +65,31 @@ export default class Migrate extends Command {
 
     await migrator.current()
 
-    const confirmed = await cli.confirm(
-      [
-        `Current Version: ${currentVersion!}`,
-        `Target Version: ${args.targetVersion}`,
-        `Continue? (y/n)`
-      ].join('\n')
-    )
+    let confirmed = Boolean(flags.from)
+
+    if (confirmed && flags.from !== currentVersion!) {
+      this.error(
+        `Provided --from=${
+          flags.from
+        } but Current Version is ${currentVersion!}`
+      )
+    }
+
+    if (!confirmed) {
+      confirmed = await cli.confirm(
+        [
+          `Current Version: ${currentVersion!}`,
+          `Target Version: ${targetVersion}`,
+          `Continue? (y/n)`
+        ].join('\n')
+      )
+    }
 
     if (confirmed) {
       await migrator.validate()
-      await migrator.migrate(args.targetVersion)
+      await migrator.migrate(targetVersion)
     } else {
-      this.log('Skipping migrate...')
+      this.debug('Skipping migrate...')
     }
   }
 }

@@ -83,7 +83,7 @@ module.exports = {
 - [`synor drop`](#synor-drop)
 - [`synor help [COMMAND]`](#synor-help-command)
 - [`synor history`](#synor-history)
-- [`synor migrate TARGETVERSION`](#synor-migrate-targetversion)
+- [`synor migrate [TARGETVERSION]`](#synor-migrate-targetversion)
 - [`synor pending`](#synor-pending)
 - [`synor repair`](#synor-repair)
 - [`synor validate`](#synor-validate)
@@ -190,13 +190,13 @@ EXAMPLES
 
 _See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/history.ts)_
 
-## `synor migrate TARGETVERSION`
+## `synor migrate [TARGETVERSION]`
 
 migrate database to specific version
 
 ```
 USAGE
-  $ synor migrate TARGETVERSION
+  $ synor migrate [TARGETVERSION]
 
 ARGUMENTS
   TARGETVERSION  target migration version
@@ -207,14 +207,17 @@ OPTIONS
   -b, --baseVersion=baseVersion        Version of the Base Migration
   -c, --config=config                  Configuration file path
   -d, --databaseUri=databaseUri        Database URI
+  -f, --from=from                      from migration version
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
+  -t, --to=to                          to migration version
 
 DESCRIPTION
   Runs necessary migrations to reach the target migration version.
 
-EXAMPLE
+EXAMPLES
   $ synor migrate 42
+  $ synor migrate --from 00 --to 42
 ```
 
 _See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.2.0/src/commands/migrate.ts)_

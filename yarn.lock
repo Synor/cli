@@ -154,10 +154,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@synor/core@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.4.0.tgz#56f9448a14942dafa80b731b0dce6eaf3572c821"
-  integrity sha512-pNocoTMMGbPwt24nbrMvk6OW97fDD81dpyXRQxaGsdz5Fc11GOySgkZBoGQEvabjV8PTVOQYa8cXDw79rRZuyQ==
+"@synor/core@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.5.0.tgz#a8f3236419ccaeed37ed9b710c7b12c9dbacee6c"
+  integrity sha512-sG327nNHtN3LGUtYX667hiY9eJPEpTbEEYvqdxl1EU8kMPSn/HPk0iz//+VWTXAxzwLb+QlFtLXh3NToCN5P5A==
   dependencies:
     debug "^4.1.1"
     lodash.defaultsdeep "^4.6.1"
@@ -208,10 +208,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.15.tgz#8dfb6ce22fedd469128137640a3aa8f17415422f"
   integrity sha512-Pv+vWicyFd07Hw/SmNnTUguqrHgDfMtjabvD9sQyxeqbpCEg8CmViLBaVPHtNsoBgZECrRf5/pgV6FJIBrGSjw==
 
-"@types/node@^13.1.0":
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.0.tgz#225cbaac5fdb2b9ac651b02c070d8aa3c37cc812"
-  integrity sha512-zwrxviZS08kRX40nqBrmERElF2vpw4IUTd5khkhBTfFH8AOaeoLVx48EC4+ZzS2/Iga7NevncqnsUSYjM4OWYA==
+"@types/node@^13.1.4":
+  version "13.1.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.1.4.tgz#4cfd90175a200ee9b02bd6b1cd19bc349741607e"
+  integrity sha512-Lue/mlp2egZJoHXZr4LndxDAd7i/7SQYhV0EjWfb/a4/OZ6tuVwMCVPiwkU5nsEipxEf7hmkSU7Em5VQ8P5NGA==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -790,10 +790,10 @@ eslint-config-oclif@^3.1, eslint-config-oclif@^3.1.0:
     eslint-plugin-node "^7.0.1"
     eslint-plugin-unicorn "^6.0.1"
 
-eslint-config-prettier@^6.7.0:
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.7.0.tgz#9a876952e12df2b284adbd3440994bf1f39dfbb9"
-  integrity sha512-FamQVKM3jjUVwhG4hEMnbtsq7xOIDm+SY5iBPfR8gKsJoAB2IQnNF+bk1+8Fy44Nq7PPJaLvkRxILYdJWoguKQ==
+eslint-config-prettier@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-6.9.0.tgz#430d24822e82f7deb1e22a435bfa3999fae4ad64"
+  integrity sha512-k4E14HBtcLv0uqThaI6I/n1LEqROp8XaPu6SO9Z32u5NlGRC07Enu1Bh2KEFw4FNHbekH8yzbIU9kUGxbiGmCA==
   dependencies:
     get-stdin "^6.0.0"
 

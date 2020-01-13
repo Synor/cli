@@ -8,7 +8,7 @@ export default class Migrate extends Command {
     `Runs necessary migrations to reach the target migration version.`
   ].join('\n')
 
-  static examples = [`$ synor migrate 42`, `$ synor migrate --from 00 --to 42`]
+  static examples = [`$ synor migrate 42`, `$ synor migrate --from=00 --to=42`]
 
   static flags = {
     ...Command.flags,

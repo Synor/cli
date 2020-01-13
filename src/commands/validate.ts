@@ -69,8 +69,7 @@ export default class Validate extends Command {
                   : color.red(row.version)
             },
             type: {
-              header: 'Type',
-              extended: true
+              header: 'Type'
             },
             title: {
               header: 'Title'

@@ -11,6 +11,7 @@ export default class Pending extends Command {
 
   static flags = {
     extended: cli.table.Flags.extended,
+    'no-header': cli.table.Flags['no-header'],
     ...Command.flags
   }
 
@@ -43,7 +44,8 @@ export default class Pending extends Command {
           }
         },
         {
-          extended: flags.extended
+          extended: flags.extended,
+          'no-header': flags['no-header']
         }
       )
     })

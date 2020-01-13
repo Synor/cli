@@ -1,5 +1,5 @@
-import Command from '../command'
 import { cli } from 'cli-ux'
+import Command from '../command'
 
 export default class Drop extends Command {
   static description = [

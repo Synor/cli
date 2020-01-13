@@ -1,10 +1,9 @@
 import { color } from '@oclif/color'
+import { isSynorError } from '@synor/core'
 import { cli } from 'cli-ux'
 import Command from '../command'
-import { isSynorError, isValidationErrorType } from '../utils/error'
 
 type MigrationRecord = import('@synor/core').MigrationRecord
-type ValidationErrorType = import('../utils/error').ValidationErrorType
 
 export default class Validate extends Command {
   static description = [
@@ -29,7 +28,7 @@ export default class Validate extends Command {
     const recordById: Record<
       number,
       MigrationRecord & {
-        status: '...' | 'valid' | ValidationErrorType
+        status: '...' | 'valid' | 'dirty' | 'hash_mismatch'
       }
     > = {}
 
@@ -43,7 +42,10 @@ export default class Validate extends Command {
         recordById[record.id].status = 'valid'
       })
       .on('validate:error', (error, record) => {
-        if (isSynorError(error) && isValidationErrorType(error.type)) {
+        if (
+          isSynorError(error, 'dirty') ||
+          isSynorError(error, 'hash_mismatch')
+        ) {
           recordById[record.id].status = error.type
         } else {
           throw error

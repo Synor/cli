@@ -1,8 +1,8 @@
 import { Command, flags } from '@oclif/command'
 import { Input } from '@oclif/parser'
+import { isSynorError } from '@synor/core'
 import { cli } from 'cli-ux'
 import { initSynor } from './synor'
-import { isSynorError } from './utils/error'
 
 type Await<T> = T extends Promise<infer U> ? U : T
 
@@ -84,38 +84,23 @@ export default abstract class extends Command {
   }
 
   async catch(error: Error) {
+    if (isSynorError(error, 'dirty') || isSynorError(error, 'hash_mismatch')) {
+      this.error(
+        [
+          error.message,
+          `Run validation for more information:`,
+          `$ ${this.config.bin} validate`
+        ].join('\n'),
+        { code: error.type, exit: 1 }
+      )
+    }
+
+    if (isSynorError(error, 'not_found')) {
+      this.error(error.message, { code: error.type, exit: 1 })
+    }
+
     if (isSynorError(error)) {
-      switch (error.type) {
-        case 'dirty':
-        case 'hash_mismatch':
-          this.error(
-            [
-              `Validation Error (${error.type}) =>`,
-              `Version(${error.data.version})`,
-              `Type(${error.data.type})`,
-              error.data.title && `Title(${error.data.title})`,
-              `\nRun validation for more information:`,
-              `\n$ ${this.config.bin} validate`
-            ].join(' '),
-            { code: error.type, exit: 1 }
-          )
-          break
-        case 'not_found':
-          this.error(
-            [
-              `Missing Migration Source =>`,
-              `Version(${error.data.version})`,
-              `Type(${error.data.type})`,
-              error.data.title && `Title(${error.data.title})`
-            ].join(' '),
-            { code: error.type, exit: 1 }
-          )
-          break
-        case 'exception': {
-          this.error(error, { code: error.type, exit: 1 })
-          break
-        }
-      }
+      this.error(error, { code: error.type, exit: 1 })
     }
 
     await super.catch(error)

@@ -70,7 +70,8 @@ module.exports = {
   migrationInfoNotation: {
     do: 'do',
     undo: 'undo',
-    separator: '.'
+    separator: '.',
+    extension: 'sql'
   }
 }
 ```

@@ -2,6 +2,7 @@ import { color } from '@oclif/color'
 import { isSynorError } from '@synor/core'
 import { cli } from 'cli-ux'
 import Command from '../command'
+import { getFormattedDate } from '../utils/get-formatted-date'
 
 type MigrationRecord = import('@synor/core').MigrationRecord
 
@@ -83,7 +84,7 @@ export default class Validate extends Command {
             },
             appliedAt: {
               header: 'AppliedAt',
-              get: row => color.reset(new Date(row.appliedAt).toLocaleString()),
+              get: row => color.reset(getFormattedDate(row.appliedAt)),
               extended: true
             },
             appliedBy: {

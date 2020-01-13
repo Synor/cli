@@ -1,5 +1,6 @@
 import { cli } from 'cli-ux'
 import Command from '../command'
+import { getFormattedDate } from '../utils/get-formatted-date'
 
 export default class History extends Command {
   static aliases = ['records']
@@ -45,7 +46,7 @@ export default class History extends Command {
           },
           appliedAt: {
             header: 'AppliedAt',
-            get: row => new Date(row.appliedAt).toLocaleString()
+            get: row => getFormattedDate(row.appliedAt)
           },
           appliedBy: {
             header: 'AppliedBy',

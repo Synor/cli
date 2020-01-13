@@ -105,6 +105,7 @@ OPTIONS
   -d, --databaseUri=databaseUri        Database URI
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
+  --no-header                          hide table header from output
 
 DESCRIPTION
   This record indicates the current migration version for the database.
@@ -218,7 +219,7 @@ DESCRIPTION
 
 EXAMPLES
   $ synor migrate 42
-  $ synor migrate --from 00 --to 42
+  $ synor migrate --from=00 --to=42
 ```
 
 _See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.3.0/src/commands/migrate.ts)_
@@ -240,6 +241,7 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
+  --no-header                          hide table header from output
 
 DESCRIPTION
   Shows the pending migrations that are available at source.

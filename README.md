@@ -104,13 +104,15 @@ OPTIONS
   -d, --databaseUri=databaseUri        Database URI
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
+  --columns=columns                    only show provided columns (comma-separated)
   --no-header                          hide table header from output
 
 DESCRIPTION
   This record indicates the current migration version for the database.
 
-EXAMPLE
+EXAMPLES
   $ synor current
+  $ synor current --no-header --columns version
 ```
 
 _See code: [src/commands/current.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/current.ts)_

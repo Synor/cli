@@ -8,9 +8,13 @@ export default class Current extends Command {
     `This record indicates the current migration version for the database.`
   ].join('\n')
 
-  static examples = [`$ synor current`]
+  static examples = [
+    `$ synor current`,
+    `$ synor current --no-header --columns version`
+  ]
 
   static flags = {
+    columns: cli.table.Flags.columns,
     'no-header': cli.table.Flags['no-header'],
     ...Command.flags
   }
@@ -60,6 +64,7 @@ export default class Current extends Command {
           }
         },
         {
+          columns: flags.columns,
           'no-header': flags['no-header']
         }
       )

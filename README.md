@@ -83,9 +83,8 @@ module.exports = {
 - [`synor current`](#synor-current)
 - [`synor drop`](#synor-drop)
 - [`synor help [COMMAND]`](#synor-help-command)
-- [`synor history`](#synor-history)
+- [`synor info`](#synor-info)
 - [`synor migrate [TARGETVERSION]`](#synor-migrate-targetversion)
-- [`synor pending`](#synor-pending)
 - [`synor repair`](#synor-repair)
 - [`synor validate`](#synor-validate)
 
@@ -161,13 +160,13 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
-## `synor history`
+## `synor info`
 
-show migration history
+show migration information
 
 ```
 USAGE
-  $ synor history
+  $ synor info
 
 OPTIONS
   -D, --databaseEngine=databaseEngine  Database Engine
@@ -178,19 +177,18 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
+  -z, --outOfOrder                     include out of order pending migrations
+  --no-header                          hide table header from output
 
 DESCRIPTION
-  Shows detailed records of the migrations that have already run on database.
-
-ALIASES
-  $ synor records
+  Shows detailed information about schema migrations.
 
 EXAMPLES
-  $ synor history
-  $ synor history --recordStartId=1
+  $ synor info
+  $ synor info --outOfOrder
 ```
 
-_See code: [src/commands/history.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/history.ts)_
+_See code: [src/commands/info.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/info.ts)_
 
 ## `synor migrate [TARGETVERSION]`
 
@@ -213,6 +211,7 @@ OPTIONS
   -i, --recordStartId=recordStartId    Migration Record Start ID
   -s, --sourceUri=sourceUri            Source URI
   -t, --to=to                          to migration version
+  -z, --outOfOrder                     include out of order pending migrations
 
 DESCRIPTION
   Runs necessary migrations to reach the target migration version.
@@ -220,37 +219,10 @@ DESCRIPTION
 EXAMPLES
   $ synor migrate 42
   $ synor migrate --from=00 --to=42
+  $ synor migrate --outOfOrder 42
 ```
 
 _See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/migrate.ts)_
-
-## `synor pending`
-
-show pending migrations
-
-```
-USAGE
-  $ synor pending
-
-OPTIONS
-  -D, --databaseEngine=databaseEngine  Database Engine
-  -S, --sourceEngine=sourceEngine      Source Engine
-  -b, --baseVersion=baseVersion        Version of the Base Migration
-  -c, --config=config                  Configuration file path
-  -d, --databaseUri=databaseUri        Database URI
-  -i, --recordStartId=recordStartId    Migration Record Start ID
-  -s, --sourceUri=sourceUri            Source URI
-  -x, --extended                       show extra columns
-  --no-header                          hide table header from output
-
-DESCRIPTION
-  Shows the pending migrations that are available at source.
-
-EXAMPLE
-  $ synor pending
-```
-
-_See code: [src/commands/pending.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/pending.ts)_
 
 ## `synor repair`
 

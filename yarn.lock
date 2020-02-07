@@ -71,6 +71,16 @@
     debug "^4.1.1"
     tslib "^1.9.3"
 
+"@oclif/config@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@oclif/config/-/config-1.14.0.tgz#0af93facd5c5087f804489f1603c4f3bc0c45014"
+  integrity sha512-KsOP/mx9lzTah+EtGqLUXN3PDL0J3zb9/dTneFyiUK2K6T7vFEGhV6OasmqTh4uMZHGYTGrNPV8x/Yw6qZNL6A==
+  dependencies:
+    "@oclif/errors" "^1.0.0"
+    "@oclif/parser" "^3.8.0"
+    debug "^4.1.1"
+    tslib "^1.9.3"
+
 "@oclif/dev-cli@^1":
   version "1.22.2"
   resolved "https://registry.yarnpkg.com/@oclif/dev-cli/-/dev-cli-1.22.2.tgz#e890f93d0335c0e3faaa25741999776259b2171f"
@@ -89,7 +99,7 @@
     qqjs "^0.3.10"
     tslib "^1.9.3"
 
-"@oclif/errors@^1.2.1", "@oclif/errors@^1.2.2":
+"@oclif/errors@^1.0.0", "@oclif/errors@^1.2.1", "@oclif/errors@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@oclif/errors/-/errors-1.2.2.tgz#9d8f269b15f13d70aa93316fed7bebc24688edc2"
   integrity sha512-Eq8BFuJUQcbAPVofDxwdE0bL14inIiwt5EaKRVY9ZDIG11jwdXZqiQEECJx0VfnLyUZdYfRd/znDI/MytdJoKg==
@@ -154,10 +164,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@synor/core@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.6.1.tgz#16db5a677c6a046b467c455e45aa7ddb16828588"
-  integrity sha512-bJIFL6jLemkz9RoW0kcQXOypiDq4u9uHA3WXl5tV2D2lUTGkzPTNsZ63dparuInVpqwghERHNvkPHFxTeo9BFw==
+"@synor/core@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@synor/core/-/core-0.8.2.tgz#3842653c7a03855e196ddf1682692171276d7289"
+  integrity sha512-a3wxZKz1J0Gg6s07P+Pqd/vTvnIvO1SkeXJOVg5hbQ6+CMi767j8Y1FffDvTPWF6l7Lcs4Tv5UrBojFr1yF+/g==
   dependencies:
     debug "^4.1.1"
     lodash.defaultsdeep "^4.6.1"
@@ -556,10 +566,10 @@ cli-ux@^5.2.1:
     treeify "^1.1.0"
     tslib "^1.9.3"
 
-cli-ux@^5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-5.4.1.tgz#d0eb2509923acd43989e11a9297de515adde9079"
-  integrity sha512-x5CJXJPKBrEo6o8Uy/Upajb9OWYMhTzOpRvKZyZ68kkHysiGd9phGP71WyHZfLUkhwdvpNUFkY2tsDr0ogyocg==
+cli-ux@^5.4.4:
+  version "5.4.4"
+  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-5.4.4.tgz#de0c73825f6716d9562a79bd6552f032ac37465a"
+  integrity sha512-e7h613CIvIbuZk30T4F7jHQTmG7MMjp2V9BARWktOGMKWXr7DJXakG2JeeYPjRhmVqUSQP3xEJZAVoTwVKDZqw==
   dependencies:
     "@oclif/command" "^1.5.1"
     "@oclif/errors" "^1.2.1"

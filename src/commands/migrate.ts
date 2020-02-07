@@ -8,7 +8,11 @@ export default class Migrate extends Command {
     `Runs necessary migrations to reach the target migration version.`
   ].join('\n')
 
-  static examples = [`$ synor migrate 42`, `$ synor migrate --from=00 --to=42`]
+  static examples = [
+    `$ synor migrate 42`,
+    `$ synor migrate --from=00 --to=42`,
+    `$ synor migrate 42 --outOfOrder`
+  ]
 
   static flags = {
     ...Command.flags,
@@ -21,6 +25,12 @@ export default class Migrate extends Command {
       char: 't',
       description: 'to migration version',
       dependsOn: ['from']
+    }),
+    outOfOrder: flags.boolean({
+      char: 'z',
+      description: 'include out of order pending migrations',
+      default: false,
+      env: 'SYNOR_OUT_OF_ORDER'
     })
   }
 
@@ -87,7 +97,7 @@ export default class Migrate extends Command {
 
     if (confirmed) {
       await migrator.validate()
-      await migrator.migrate(targetVersion)
+      await migrator.migrate(targetVersion, { outOfOrder: flags.outOfOrder })
     } else {
       this.debug('Skipping migrate...')
     }

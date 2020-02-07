@@ -4,6 +4,14 @@
 
 - ...
 
+## [0.5.0] - 2020-02-07
+
+- Bump dependency versions
+- Remove commands: `current`, `pending` [Synor/core#32](https://github.com/Synor/core/issues/32)
+- Add command: `info` (`current` and `pending` combined) [Synor/core#32](https://github.com/Synor/core/issues/32)
+- Add `--columns`, `--filter` flags for command: `info`
+- Add `--columns` flag for command: `current`
+
 ## [0.4.0] - 2020-01-14
 
 - Bump dependency versions
@@ -25,7 +33,8 @@
 
 - Initial release
 
-[unreleased]: https://github.com/Synor/cli/compare/0.4.0...HEAD
+[unreleased]: https://github.com/Synor/cli/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/Synor/cli/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/Synor/cli/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/Synor/cli/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/Synor/cli/compare/0.1.0...0.2.0

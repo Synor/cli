@@ -9,11 +9,17 @@ export default class Info extends Command {
     `Shows detailed information about schema migrations.`
   ].join('\n')
 
-  static examples = [`$ synor info`, `$ synor info --outOfOrder`]
+  static examples = [
+    `$ synor info`,
+    `$ synor info --outOfOrder`,
+    `$ synor info --no-header --columns version --filter state=pending`
+  ]
 
   static flags = {
     ...Command.flags,
+    columns: cli.table.Flags.columns,
     extended: cli.table.Flags.extended,
+    filter: cli.table.Flags.filter,
     'no-header': cli.table.Flags['no-header'],
     outOfOrder: flags.boolean({
       char: 'z',
@@ -83,7 +89,9 @@ export default class Info extends Command {
           }
         },
         {
+          columns: flags.columns,
           extended: flags.extended,
+          filter: flags.filter,
           'no-header': flags['no-header']
         }
       )

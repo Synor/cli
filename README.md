@@ -178,6 +178,8 @@ OPTIONS
   -s, --sourceUri=sourceUri            Source URI
   -x, --extended                       show extra columns
   -z, --outOfOrder                     include out of order pending migrations
+  --columns=columns                    only show provided columns (comma-separated)
+  --filter=filter                      filter property by partial string matching, ex: name=foo
   --no-header                          hide table header from output
 
 DESCRIPTION
@@ -186,6 +188,7 @@ DESCRIPTION
 EXAMPLES
   $ synor info
   $ synor info --outOfOrder
+  $ synor info --no-header --columns version --filter state=pending
 ```
 
 _See code: [src/commands/info.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/info.ts)_
@@ -219,7 +222,7 @@ DESCRIPTION
 EXAMPLES
   $ synor migrate 42
   $ synor migrate --from=00 --to=42
-  $ synor migrate --outOfOrder 42
+  $ synor migrate 42 --outOfOrder
 ```
 
 _See code: [src/commands/migrate.ts](https://github.com/Synor/cli/blob/v0.4.0/src/commands/migrate.ts)_

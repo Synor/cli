@@ -5,7 +5,7 @@
 
 # Synor CLI
 
-CLI for Synor - Database Migration Tool
+CLI for Synor - Database Schema Migration Tool
 
 <!-- toc -->
 

@@ -2,9 +2,12 @@
 
 ## [Unreleased]
 
+- ...
+
+## [0.6.0] - 2020-02-22
+
 - Export type: `SynorCLIConfig`
 - Support loading config from `.ts` file [#3](https://github.com/Synor/cli/issues/3)
-- ...
 
 ## [0.5.0] - 2020-02-07
 
@@ -35,7 +38,8 @@
 
 - Initial release
 
-[unreleased]: https://github.com/Synor/cli/compare/0.5.0...HEAD
+[unreleased]: https://github.com/Synor/cli/compare/0.6.0...HEAD
+[0.6.0]: https://github.com/Synor/cli/compare/0.5.0...0.6.0
 [0.5.0]: https://github.com/Synor/cli/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/Synor/cli/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/Synor/cli/compare/0.2.0...0.3.0

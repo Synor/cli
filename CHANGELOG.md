@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Export type: `SynorCLIConfig`
+- Support loading config from `.ts` file [#3](https://github.com/Synor/cli/issues/3)
 - ...
 
 ## [0.5.0] - 2020-02-07

@@ -1,7 +1,8 @@
 import { statSync } from 'fs'
 import defaultsDeep from 'lodash.defaultsdeep'
-import { resolve as resolvePath } from 'path'
+import { extname, resolve as resolvePath } from 'path'
 import { dynamicImport } from './utils/dynamic-import'
+import { registerTSNode } from './utils/register-ts-node'
 
 type SynorConfig = import('@synor/core').SynorConfig
 
@@ -19,7 +20,13 @@ export type SynorCLIConfig = {
 async function readConfigFile(
   configFile?: string
 ): Promise<Partial<SynorCLIConfig & { default?: SynorCLIConfig }>> {
-  const filePath = [configFile || '', `.synorrc.js`, `synor.config.js`]
+  const filePath = [
+    configFile || '',
+    `.synorrc.js`,
+    `.synorrc.ts`,
+    `synor.config.js`,
+    `synor.config.ts`
+  ]
     .map(filename => resolvePath(filename))
     .find(filePath => {
       try {
@@ -33,7 +40,15 @@ async function readConfigFile(
       }
     })
 
-  return filePath ? dynamicImport(filePath) : {}
+  if (!filePath) {
+    return {}
+  }
+
+  if (extname(filePath) === '.ts') {
+    registerTSNode()
+  }
+
+  return dynamicImport(filePath)
 }
 
 export async function getConfig(

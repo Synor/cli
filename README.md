@@ -35,9 +35,13 @@ Synor CLI reads config file from one of the following locations:
 
 - File path passed to `--config` or `-c` flag
 - `.synorrc.js`
+- `.synorrc.ts`
 - `synor.config.js`
+- `synor.config.ts`
 
 The first one found is used by Synor CLI.
+
+_Note: `ts-node` is required for loading config from `.ts` file_
 
 Options in config file is overridden by their available command flag counterparts.
 

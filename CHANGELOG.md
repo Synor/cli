@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- Export type: `SynorCLIConfig`
 - ...
 
 ## [0.5.0] - 2020-02-07

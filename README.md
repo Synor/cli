@@ -41,7 +41,7 @@ The first one found is used by Synor CLI.
 
 Options in config file is overridden by their available command flag counterparts.
 
-**Required Options**:
+**Main Options**:
 
 | Name             | Description                                                                                                     |
 | ---------------- | --------------------------------------------------------------------------------------------------------------- |

@@ -5,15 +5,16 @@ import { dynamicImport } from './utils/dynamic-import'
 
 type SynorConfig = import('@synor/core').SynorConfig
 
-export type SynorCLIConfig = Pick<SynorConfig, 'databaseUri' | 'sourceUri'> & {
+export type SynorCLIConfig = {
+  /**
+   * Database Engine function / [package name](https://www.npmjs.com/search?q=keywords:synor-database) / module path
+   */
   databaseEngine?: SynorConfig['DatabaseEngine'] | string
+  /**
+   * Source Engine function / [package name](https://www.npmjs.com/search?q=keywords:synor-source) / module path
+   */
   sourceEngine?: SynorConfig['SourceEngine'] | string
-} & Partial<
-    Omit<
-      SynorConfig,
-      'DatabaseEngine' | 'databaseUri' | 'SourceEngine' | 'sourceUri'
-    >
-  >
+} & Partial<Omit<SynorConfig, 'DatabaseEngine' | 'SourceEngine'>>
 
 async function readConfigFile(
   configFile?: string

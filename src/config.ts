@@ -19,7 +19,7 @@ export type SynorCLIConfig = {
 
 async function readConfigFile(
   configFile?: string
-): Promise<Partial<SynorCLIConfig & { default?: SynorCLIConfig }>> {
+): Promise<Partial<SynorCLIConfig>> {
   const filePath = [
     configFile || '',
     `.synorrc.js`,
